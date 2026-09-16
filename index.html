@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sohba CRM</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23121A2B'/%3E%3Cg fill='%23F0EAE0'%3E%3Ccircle cx='50' cy='16' r='7'/%3E%3Ccircle cx='74' cy='26' r='7'/%3E%3Ccircle cx='84' cy='50' r='7'/%3E%3Ccircle cx='74' cy='74' r='7'/%3E%3Ccircle cx='50' cy='84' r='7'/%3E%3Ccircle cx='26' cy='74' r='7'/%3E%3Ccircle cx='16' cy='50' r='7'/%3E%3C/g%3E%3Ccircle cx='26' cy='26' r='7' fill='%23FFC24B'/%3E%3C/svg%3E" />
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<style>
+  :root{
+    --night:#121A2B; --night-2:#0B1120; --night-3:#1B2540;
+    --paper:#F0EAE0; --ink:#191813; --lamp:#FFC24B; --nile:#57B8A0;
+    --dim:#98A3BD; --line:rgba(255,255,255,.14); --red:#E06A55;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--night); color:var(--paper);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-size:15px; -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--lamp)}
+  .wrap{width:min(1200px,94vw);margin:0 auto;padding:22px 0 60px}
+
+  /* topbar */
+  .top{display:flex;align-items:center;gap:12px;padding:18px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .top .mark{width:26px;height:26px;flex:none}
+  .top b{font-size:18px;font-weight:800;letter-spacing:-.02em}
+  .top .who{margin-left:auto;color:var(--dim);font-size:13px}
+  .btn{
+    background:var(--lamp);color:#22190A;border:none;border-radius:100px;
+    padding:9px 18px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;
+  }
+  .btn.ghost{background:transparent;color:var(--dim);border:1px solid var(--line)}
+  .btn:disabled{opacity:.5;cursor:not-allowed}
+
+  /* login */
+  .login{max-width:340px;margin:12vh auto 0;text-align:center}
+  .login .mark{width:44px;height:44px;margin-bottom:18px}
+  .login h1{font-size:22px;font-weight:800;letter-spacing:-.02em;margin:0 0 4px}
+  .login p{color:var(--dim);font-size:13px;margin:0 0 26px}
+  .login input{
+    width:100%;padding:12px 14px;margin-bottom:12px;font-size:15px;
+    border:1px solid var(--line);background:var(--night-3);color:var(--paper);
+    border-radius:10px;font-family:inherit;
+  }
+  .login input:focus{outline:none;border-color:var(--lamp)}
+  .login .btn{width:100%;padding:12px}
+  .err{color:var(--red);font-size:13px;min-height:18px;margin-top:10px}
+
+  /* stats */
+  .stats{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 16px}
+  .stat{background:var(--night-3);border:1px solid var(--line);border-radius:10px;padding:10px 16px;min-width:96px}
+  .stat b{display:block;font-size:22px;font-weight:800}
+  .stat span{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.04em}
+
+  .toolbar{display:flex;gap:10px;align-items:center;margin-bottom:12px;flex-wrap:wrap}
+  .toolbar input{
+    flex:1;min-width:180px;padding:10px 14px;font-size:14px;border:1px solid var(--line);
+    background:var(--night-3);color:var(--paper);border-radius:10px;font-family:inherit;
+  }
+  .toolbar input:focus{outline:none;border-color:var(--lamp)}
+  .toolbar select{
+    padding:10px 14px;font-size:14px;border:1px solid var(--line);background:var(--night-3);
+    color:var(--paper);border-radius:10px;font-family:inherit;
+  }
+
+  /* table */
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+  table{border-collapse:collapse;width:100%;font-size:13.5px}
+  th,td{padding:11px 13px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:var(--night-3);font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--dim);position:sticky;top:0;white-space:nowrap}
+  tr:last-child td{border-bottom:none}
+  tr:hover td{background:rgba(255,255,255,.03)}
+  .nm{font-weight:600}
+  .muted{color:var(--dim)}
+  .tags{display:flex;flex-wrap:wrap;gap:4px;max-width:220px}
+  .tag{background:var(--night-3);border:1px solid var(--line);border-radius:100px;padding:2px 9px;font-size:11.5px;color:#CFC9BD}
+  .want{max-width:280px;color:#CFC9BD;font-size:13px}
+  .phone{font-variant-numeric:tabular-nums;white-space:nowrap}
+  td select{
+    padding:6px 10px;font-size:13px;border:1px solid var(--line);border-radius:100px;
+    background:var(--night-3);color:var(--paper);font-family:inherit;cursor:pointer;
+  }
+  select.s-new{border-color:var(--dim)}
+  select.s-accepted{border-color:var(--nile);color:var(--nile)}
+  select.s-waitlist{border-color:var(--lamp);color:var(--lamp)}
+  select.s-rejected{border-color:var(--red);color:var(--red)}
+
+  .empty{padding:40px;text-align:center;color:var(--dim)}
+  .hidden{display:none}
+  #banner{font-size:13px;color:var(--nile);min-height:18px;margin:8px 2px}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginView" class="login">
+  <svg class="mark" viewBox="0 0 100 100" aria-hidden="true">
+    <g fill="#F0EAE0"><circle cx="50" cy="16" r="7"/><circle cx="74" cy="26" r="7"/><circle cx="84" cy="50" r="7"/><circle cx="74" cy="74" r="7"/><circle cx="50" cy="84" r="7"/><circle cx="26" cy="74" r="7"/><circle cx="16" cy="50" r="7"/></g>
+    <circle cx="26" cy="26" r="7" fill="#FFC24B"/>
+  </svg>
+  <h1>Sohba CRM</h1>
+  <p>Applicants — private</p>
+  <form id="loginForm">
+    <input type="email" id="email" placeholder="Email" autocomplete="username" required>
+    <input type="password" id="password" placeholder="Password" autocomplete="current-password" required>
+    <button class="btn" type="submit" id="loginBtn">Sign in</button>
+    <div class="err" id="loginErr"></div>
+  </form>
+</div>
+
+<!-- APP -->
+<div id="appView" class="wrap hidden">
+  <div class="top">
+    <svg class="mark" viewBox="0 0 100 100" aria-hidden="true">
+      <g fill="#F0EAE0"><circle cx="50" cy="16" r="7"/><circle cx="74" cy="26" r="7"/><circle cx="84" cy="50" r="7"/><circle cx="74" cy="74" r="7"/><circle cx="50" cy="84" r="7"/><circle cx="26" cy="74" r="7"/><circle cx="16" cy="50" r="7"/></g>
+      <circle cx="26" cy="26" r="7" fill="#FFC24B"/>
+    </svg>
+    <b>Sohba CRM</b>
+    <span class="who" id="who"></span>
+    <button class="btn ghost" id="refreshBtn">Refresh</button>
+    <button class="btn ghost" id="logoutBtn">Log out</button>
+  </div>
+
+  <div class="stats" id="stats"></div>
+
+  <div class="toolbar">
+    <input type="search" id="search" placeholder="Search name, phone, area, interest…">
+    <select id="filter">
+      <option value="">All statuses</option>
+      <option value="new">New</option>
+      <option value="accepted">Accepted</option>
+      <option value="waitlist">Waitlist</option>
+      <option value="rejected">Rejected</option>
+    </select>
+  </div>
+
+  <div id="banner"></div>
+
+  <div class="tablewrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th><th>Age</th><th>Gender</th><th>Area</th><th>Phone</th>
+          <th>Interests</th><th>Wants to try</th><th>Applied</th><th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <div class="empty hidden" id="empty">No applications yet.</div>
+  </div>
+</div>
+
+<script>
+const CONFIG = {
+  url: "https://oxfzuonhkufpgvgqvjhk.supabase.co",
+  anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im94Znp1b25oa3VmcGd2Z3F2amhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg0MzY4MDQsImV4cCI6MjEwNDAxMjgwNH0.8ErjRctRmGE46PEwI0p8IOZLrM_A6HpZLlvrGBSZ6fc"
+};
+const STATUSES = ['new','accepted','waitlist','rejected'];
+
+const sb = supabase.createClient(CONFIG.url, CONFIG.anonKey);
+
+const $ = id => document.getElementById(id);
+const loginView = $('loginView'), appView = $('appView');
+let DATA = [];
+
+function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+/* ── auth ── */
+async function boot(){
+  const { data:{ session } } = await sb.auth.getSession();
+  session ? showApp(session) : showLogin();
+}
+function showLogin(){ appView.classList.add('hidden'); loginView.classList.remove('hidden'); }
+function showApp(session){
+  loginView.classList.add('hidden'); appView.classList.remove('hidden');
+  $('who').textContent = session.user.email;
+  load();
+}
+
+$('loginForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const btn = $('loginBtn'); btn.disabled = true; btn.textContent = 'Signing in…'; $('loginErr').textContent='';
+  const { data, error } = await sb.auth.signInWithPassword({ email:$('email').value.trim(), password:$('password').value });
+  btn.disabled = false; btn.textContent = 'Sign in';
+  if(error){ $('loginErr').textContent = error.message; return; }
+  showApp(data.session);
+});
+$('logoutBtn').onclick = async () => { await sb.auth.signOut(); DATA=[]; showLogin(); };
+$('refreshBtn').onclick = () => load();
+
+/* ── data ── */
+async function load(){
+  $('banner').textContent = 'Loading…';
+  const { data, error } = await sb.from('applications').select('*').order('created_at',{ascending:false});
+  if(error){ $('banner').style.color='var(--red)'; $('banner').textContent = 'Load failed: '+error.message; return; }
+  $('banner').style.color='var(--nile)'; $('banner').textContent='';
+  DATA = data || [];
+  renderStats(); render();
+}
+
+function renderStats(){
+  const counts = { total: DATA.length };
+  STATUSES.forEach(s => counts[s] = DATA.filter(r => r.status===s).length);
+  const cells = [['Total','total'],['New','new'],['Accepted','accepted'],['Waitlist','waitlist'],['Rejected','rejected']];
+  $('stats').innerHTML = cells.map(([label,key]) =>
+    `<div class="stat"><b>${counts[key]||0}</b><span>${label}</span></div>`).join('');
+}
+
+function render(){
+  const q = $('search').value.trim().toLowerCase();
+  const f = $('filter').value;
+  const rows = DATA.filter(r => {
+    if(f && r.status!==f) return false;
+    if(!q) return true;
+    const hay = [r.name,r.phone,r.area,r.gender,(r.interests||[]).join(' '),r.want].join(' ').toLowerCase();
+    return hay.includes(q);
+  });
+  const tb = $('rows');
+  $('empty').classList.toggle('hidden', DATA.length!==0);
+  tb.innerHTML = rows.map(r => {
+    const tags = (r.interests||[]).map(t => `<span class="tag">${esc(t)}</span>`).join('');
+    const applied = r.created_at ? new Date(r.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short'}) : '';
+    const opts = STATUSES.map(s => `<option value="${s}"${s===r.status?' selected':''}>${s}</option>`).join('');
+    return `<tr>
+      <td class="nm">${esc(r.name)}</td>
+      <td>${esc(r.age)}</td>
+      <td class="muted">${esc(r.gender)}</td>
+      <td>${esc(r.area)}</td>
+      <td class="phone">${esc(r.phone)}</td>
+      <td><div class="tags">${tags}</div></td>
+      <td class="want">${esc(r.want)}</td>
+      <td class="muted">${applied}</td>
+      <td><select class="s-${esc(r.status)}" data-id="${esc(r.id)}">${opts}</select></td>
+    </tr>`;
+  }).join('');
+
+  tb.querySelectorAll('select').forEach(sel => sel.addEventListener('change', onStatusChange));
+}
+
+async function onStatusChange(e){
+  const sel = e.target, id = sel.dataset.id, status = sel.value, prev = DATA.find(r=>r.id===id)?.status;
+  sel.disabled = true;
+  const { error } = await sb.from('applications').update({ status }).eq('id', id);
+  sel.disabled = false;
+  if(error){
+    $('banner').style.color='var(--red)'; $('banner').textContent = 'Update failed: '+error.message;
+    sel.value = prev; return;
+  }
+  const row = DATA.find(r=>r.id===id); if(row) row.status = status;
+  sel.className = 's-'+status;
+  $('banner').style.color='var(--nile)'; $('banner').textContent = 'Saved.';
+  renderStats();
+  setTimeout(()=>{ if($('banner').textContent==='Saved.') $('banner').textContent=''; }, 1500);
+}
+
+$('search').addEventListener('input', render);
+$('filter').addEventListener('change', render);
+
+sb.auth.onAuthStateChange((_e, session) => { if(!session) showLogin(); });
+boot();
+</script>
+</body>
+</html>
