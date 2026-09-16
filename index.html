@@ -105,6 +105,19 @@
   .rmember button:hover{color:var(--red)}
   .cyc .cfoot{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
   .pill{font-size:12px;color:var(--dim);background:var(--night);border:1px solid var(--line);border-radius:100px;padding:3px 10px}
+
+  /* modal */
+  .modal{position:fixed;inset:0;background:rgba(6,10,20,.7);display:flex;align-items:center;justify-content:center;z-index:30;padding:18px}
+  .sheet{background:var(--night-3);border:1px solid var(--line);border-radius:16px;padding:22px;width:min(560px,100%);max-height:92vh;overflow:auto}
+  .sheet h3{margin:0 0 16px;font-size:18px;font-weight:800;letter-spacing:-.01em}
+  .fg2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .sheet label{display:block;font-size:12px;color:var(--dim);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+  .sheet label.full{margin-top:12px}
+  .sheet input,.sheet select,.sheet textarea{width:100%;margin-top:5px;padding:10px 12px;font-size:14px;border:1px solid var(--line);background:var(--night);color:var(--paper);border-radius:9px;font-family:inherit;text-transform:none;font-weight:400}
+  .sheet input:focus,.sheet select:focus,.sheet textarea:focus{outline:none;border-color:var(--lamp)}
+  .sheet textarea{resize:vertical}
+  .mfoot{display:flex;gap:10px;justify-content:flex-end;margin-top:18px}
+  @media (max-width:520px){ .fg2{grid-template-columns:1fr} }
 </style>
 </head>
 <body>
@@ -148,6 +161,7 @@
         <option value="waitlist">Waitlist</option><option value="rejected">Rejected</option>
       </select>
       <select id="cycleFilter"><option value="">All cycles</option></select>
+      <button class="btn sm" id="newApplicantBtn">+ New applicant</button>
     </div>
     <div class="tablewrap">
       <table>
@@ -179,6 +193,30 @@
   <option>Maadi</option><option>Zamalek</option><option>Downtown / Garden City</option>
   <option>Mohandessin / Dokki</option><option>6th October / Sheikh Zayed</option>
 </datalist>
+
+<!-- NEW APPLICANT MODAL -->
+<div id="modal" class="modal hidden">
+  <div class="sheet">
+    <h3>New applicant <span class="muted" style="font-weight:400;font-size:13px">— added manually</span></h3>
+    <div class="fg2">
+      <label>Name*<input id="m_name" placeholder="Full name"></label>
+      <label>Phone*<input id="m_phone" placeholder="01x xxxx xxxx"></label>
+      <label>Age<input id="m_age" type="number" min="16" max="80"></label>
+      <label>Gender
+        <select id="m_gender"><option value="">—</option><option>Woman</option><option>Man</option><option>Prefer not to say</option></select>
+      </label>
+      <label>Area<input id="m_area" list="areas" placeholder="Where they live"></label>
+      <label>Assign cycle<select id="m_cycle"></select></label>
+    </div>
+    <label class="full">Interests <span class="muted">(comma-separated)</span><input id="m_interests" placeholder="Board games, Film, Padel"></label>
+    <label class="full">Wants to try<textarea id="m_want" rows="2" placeholder="Optional"></textarea></label>
+    <div class="err" id="m_err"></div>
+    <div class="mfoot">
+      <button class="btn ghost" id="m_cancel">Cancel</button>
+      <button class="btn" id="m_save">Add applicant</button>
+    </div>
+  </div>
+</div>
 
 <div id="banner"></div>
 
@@ -411,6 +449,42 @@ function wireCycleCards(){
 $('search').addEventListener('input', renderApplicants);
 $('filter').addEventListener('change', renderApplicants);
 $('cycleFilter').addEventListener('change', renderApplicants);
+
+/* ── new applicant (DM signups) ── */
+function openModal(){
+  ['m_name','m_phone','m_age','m_area','m_interests','m_want'].forEach(id=>$(id).value='');
+  $('m_gender').value=''; $('m_err').textContent='';
+  $('m_cycle').innerHTML = cycleOptions(null);
+  $('modal').classList.remove('hidden'); $('m_name').focus();
+}
+function closeModal(){ $('modal').classList.add('hidden'); }
+$('newApplicantBtn').onclick = openModal;
+$('m_cancel').onclick = closeModal;
+$('modal').addEventListener('click', e => { if(e.target===$('modal')) closeModal(); });
+
+$('m_save').onclick = async () => {
+  const name = $('m_name').value.trim(), phone = $('m_phone').value.trim();
+  if(!name || !phone){ $('m_err').textContent = 'Name and phone are required.'; return; }
+  const entry = {
+    name, phone,
+    age: $('m_age').value ? Number($('m_age').value) : null,
+    gender: $('m_gender').value || null,
+    area: $('m_area').value.trim() || null,
+    interests: $('m_interests').value.split(',').map(s=>s.trim()).filter(Boolean),
+    want: $('m_want').value.trim() || null,
+    cycle_id: $('m_cycle').value || null,
+    status: 'new'
+  };
+  $('m_save').disabled = true;
+  const { error } = await sb.from('applications').insert(entry);
+  $('m_save').disabled = false;
+  if(error){
+    $('m_err').textContent = /duplicate|unique/i.test(error.message)
+      ? 'That phone is already in this cycle.' : 'Save failed: '+error.message;
+    return;
+  }
+  closeModal(); await loadAll(); toast('Applicant added.');
+};
 
 boot();
 </script>
