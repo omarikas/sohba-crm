@@ -20,52 +20,41 @@
     font-size:15px; -webkit-font-smoothing:antialiased;
   }
   a{color:var(--lamp)}
-  .wrap{width:min(1200px,94vw);margin:0 auto;padding:22px 0 60px}
+  .wrap{width:min(1240px,95vw);margin:0 auto;padding:22px 0 60px}
 
-  /* topbar */
   .top{display:flex;align-items:center;gap:12px;padding:18px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
   .top .mark{width:26px;height:26px;flex:none}
   .top b{font-size:18px;font-weight:800;letter-spacing:-.02em}
   .top .who{margin-left:auto;color:var(--dim);font-size:13px}
-  .btn{
-    background:var(--lamp);color:#22190A;border:none;border-radius:100px;
-    padding:9px 18px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;
-  }
+  .btn{background:var(--lamp);color:#22190A;border:none;border-radius:100px;padding:9px 18px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit}
   .btn.ghost{background:transparent;color:var(--dim);border:1px solid var(--line)}
+  .btn.sm{padding:6px 12px;font-size:13px}
+  .btn.danger{background:transparent;color:var(--red);border:1px solid rgba(224,106,85,.4)}
   .btn:disabled{opacity:.5;cursor:not-allowed}
 
-  /* login */
+  .tabs{display:flex;gap:8px;margin:20px 0 4px}
+  .tab{padding:8px 16px;border-radius:100px;border:1px solid var(--line);background:transparent;color:var(--dim);cursor:pointer;font-size:14px;font-weight:600;font-family:inherit}
+  .tab.on{background:var(--night-3);color:var(--paper);border-color:var(--lamp)}
+
   .login{max-width:340px;margin:12vh auto 0;text-align:center}
   .login .mark{width:44px;height:44px;margin-bottom:18px}
   .login h1{font-size:22px;font-weight:800;letter-spacing:-.02em;margin:0 0 4px}
   .login p{color:var(--dim);font-size:13px;margin:0 0 26px}
-  .login input{
-    width:100%;padding:12px 14px;margin-bottom:12px;font-size:15px;
-    border:1px solid var(--line);background:var(--night-3);color:var(--paper);
-    border-radius:10px;font-family:inherit;
-  }
+  .login input{width:100%;padding:12px 14px;margin-bottom:12px;font-size:15px;border:1px solid var(--line);background:var(--night-3);color:var(--paper);border-radius:10px;font-family:inherit}
   .login input:focus{outline:none;border-color:var(--lamp)}
   .login .btn{width:100%;padding:12px}
   .err{color:var(--red);font-size:13px;min-height:18px;margin-top:10px}
 
-  /* stats */
-  .stats{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 16px}
-  .stat{background:var(--night-3);border:1px solid var(--line);border-radius:10px;padding:10px 16px;min-width:96px}
+  .stats{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 14px}
+  .stat{background:var(--night-3);border:1px solid var(--line);border-radius:10px;padding:10px 16px;min-width:92px}
   .stat b{display:block;font-size:22px;font-weight:800}
   .stat span{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.04em}
 
   .toolbar{display:flex;gap:10px;align-items:center;margin-bottom:12px;flex-wrap:wrap}
-  .toolbar input{
-    flex:1;min-width:180px;padding:10px 14px;font-size:14px;border:1px solid var(--line);
-    background:var(--night-3);color:var(--paper);border-radius:10px;font-family:inherit;
-  }
+  .toolbar input{flex:1;min-width:180px;padding:10px 14px;font-size:14px;border:1px solid var(--line);background:var(--night-3);color:var(--paper);border-radius:10px;font-family:inherit}
   .toolbar input:focus{outline:none;border-color:var(--lamp)}
-  .toolbar select{
-    padding:10px 14px;font-size:14px;border:1px solid var(--line);background:var(--night-3);
-    color:var(--paper);border-radius:10px;font-family:inherit;
-  }
+  .toolbar select{padding:10px 14px;font-size:14px;border:1px solid var(--line);background:var(--night-3);color:var(--paper);border-radius:10px;font-family:inherit}
 
-  /* table */
   .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
   table{border-collapse:collapse;width:100%;font-size:13.5px}
   th,td{padding:11px 13px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
@@ -74,14 +63,12 @@
   tr:hover td{background:rgba(255,255,255,.03)}
   .nm{font-weight:600}
   .muted{color:var(--dim)}
-  .tags{display:flex;flex-wrap:wrap;gap:4px;max-width:220px}
+  .tags{display:flex;flex-wrap:wrap;gap:4px;max-width:200px}
   .tag{background:var(--night-3);border:1px solid var(--line);border-radius:100px;padding:2px 9px;font-size:11.5px;color:#CFC9BD}
-  .want{max-width:280px;color:#CFC9BD;font-size:13px}
+  .want{max-width:240px;color:#CFC9BD;font-size:13px}
   .phone{font-variant-numeric:tabular-nums;white-space:nowrap}
-  td select{
-    padding:6px 10px;font-size:13px;border:1px solid var(--line);border-radius:100px;
-    background:var(--night-3);color:var(--paper);font-family:inherit;cursor:pointer;
-  }
+  td select,td input{padding:6px 10px;font-size:13px;border:1px solid var(--line);border-radius:8px;background:var(--night-3);color:var(--paper);font-family:inherit}
+  td select{border-radius:100px;cursor:pointer}
   select.s-new{border-color:var(--dim)}
   select.s-accepted{border-color:var(--nile);color:var(--nile)}
   select.s-waitlist{border-color:var(--lamp);color:var(--lamp)}
@@ -89,17 +76,42 @@
 
   .empty{padding:40px;text-align:center;color:var(--dim)}
   .hidden{display:none}
-  #banner{font-size:13px;color:var(--nile);min-height:18px;margin:8px 2px}
+  #banner{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:20;background:var(--night-3);border:1px solid var(--line);border-radius:100px;padding:8px 18px;font-size:13px;opacity:0;transition:opacity .2s ease;pointer-events:none}
+  #banner.show{opacity:1}
+
+  /* cycles */
+  .newcycle{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:var(--night-3);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:18px}
+  .newcycle input{padding:10px 14px;font-size:14px;border:1px solid var(--line);background:var(--night);color:var(--paper);border-radius:10px;font-family:inherit}
+  .newcycle input:focus{outline:none;border-color:var(--lamp)}
+  .cycles{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:16px}
+  .cyc{background:var(--night-3);border:1px solid var(--line);border-radius:14px;padding:16px}
+  .cyc .chead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+  .cyc .cname{font-size:17px;font-weight:800;letter-spacing:-.01em;flex:1;min-width:120px;background:transparent;border:none;color:var(--paper);font-family:inherit;padding:2px 0}
+  .cyc .cname:focus{outline:none;border-bottom:1px solid var(--lamp)}
+  .cyc .cmeta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .cyc .cmeta input,.cyc .cmeta select{padding:7px 11px;font-size:13px;border:1px solid var(--line);background:var(--night);color:var(--paper);border-radius:8px;font-family:inherit}
+  .cyc h4{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--dim);margin:14px 0 8px}
+  .outing{display:flex;gap:8px;align-items:center;margin-bottom:7px}
+  .outing .seq{width:20px;color:var(--dim);font-size:12px;flex:none;text-align:center}
+  .outing .ot{flex:1;min-width:70px}
+  .outing .ol{flex:1.4;min-width:90px}
+  .outing input{padding:7px 10px;font-size:13px;border:1px solid var(--line);background:var(--night);color:var(--paper);border-radius:8px;font-family:inherit;width:100%}
+  .outing input:focus{outline:none;border-color:var(--lamp)}
+  .outing .x{background:transparent;border:none;color:var(--dim);cursor:pointer;font-size:16px;flex:none;padding:0 4px}
+  .outing .x:hover{color:var(--red)}
+  .roster{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+  .rmember{display:flex;align-items:center;gap:6px;background:var(--night);border:1px solid var(--line);border-radius:100px;padding:3px 6px 3px 11px;font-size:12.5px}
+  .rmember button{background:transparent;border:none;color:var(--dim);cursor:pointer;font-size:14px}
+  .rmember button:hover{color:var(--red)}
+  .cyc .cfoot{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+  .pill{font-size:12px;color:var(--dim);background:var(--night);border:1px solid var(--line);border-radius:100px;padding:3px 10px}
 </style>
 </head>
 <body>
 
 <!-- LOGIN -->
 <div id="loginView" class="login">
-  <svg class="mark" viewBox="0 0 100 100" aria-hidden="true">
-    <g fill="#F0EAE0"><circle cx="50" cy="16" r="7"/><circle cx="74" cy="26" r="7"/><circle cx="84" cy="50" r="7"/><circle cx="74" cy="74" r="7"/><circle cx="50" cy="84" r="7"/><circle cx="26" cy="74" r="7"/><circle cx="16" cy="50" r="7"/></g>
-    <circle cx="26" cy="26" r="7" fill="#FFC24B"/>
-  </svg>
+  <svg class="mark" viewBox="0 0 100 100" aria-hidden="true"><g fill="#F0EAE0"><circle cx="50" cy="16" r="7"/><circle cx="74" cy="26" r="7"/><circle cx="84" cy="50" r="7"/><circle cx="74" cy="74" r="7"/><circle cx="50" cy="84" r="7"/><circle cx="26" cy="74" r="7"/><circle cx="16" cy="50" r="7"/></g><circle cx="26" cy="26" r="7" fill="#FFC24B"/></svg>
   <h1>Sohba CRM</h1>
   <p>Applicants — private</p>
   <form id="loginForm">
@@ -113,44 +125,62 @@
 <!-- APP -->
 <div id="appView" class="wrap hidden">
   <div class="top">
-    <svg class="mark" viewBox="0 0 100 100" aria-hidden="true">
-      <g fill="#F0EAE0"><circle cx="50" cy="16" r="7"/><circle cx="74" cy="26" r="7"/><circle cx="84" cy="50" r="7"/><circle cx="74" cy="74" r="7"/><circle cx="50" cy="84" r="7"/><circle cx="26" cy="74" r="7"/><circle cx="16" cy="50" r="7"/></g>
-      <circle cx="26" cy="26" r="7" fill="#FFC24B"/>
-    </svg>
+    <svg class="mark" viewBox="0 0 100 100" aria-hidden="true"><g fill="#F0EAE0"><circle cx="50" cy="16" r="7"/><circle cx="74" cy="26" r="7"/><circle cx="84" cy="50" r="7"/><circle cx="74" cy="74" r="7"/><circle cx="50" cy="84" r="7"/><circle cx="26" cy="74" r="7"/><circle cx="16" cy="50" r="7"/></g><circle cx="26" cy="26" r="7" fill="#FFC24B"/></svg>
     <b>Sohba CRM</b>
     <span class="who" id="who"></span>
     <button class="btn ghost" id="refreshBtn">Refresh</button>
     <button class="btn ghost" id="logoutBtn">Log out</button>
   </div>
 
-  <div class="stats" id="stats"></div>
-
-  <div class="toolbar">
-    <input type="search" id="search" placeholder="Search name, phone, area, interest…">
-    <select id="filter">
-      <option value="">All statuses</option>
-      <option value="new">New</option>
-      <option value="accepted">Accepted</option>
-      <option value="waitlist">Waitlist</option>
-      <option value="rejected">Rejected</option>
-    </select>
+  <div class="tabs">
+    <button class="tab on" data-view="applicants">Applicants</button>
+    <button class="tab" data-view="cycles">Cycles</button>
   </div>
 
-  <div id="banner"></div>
-
-  <div class="tablewrap">
-    <table>
-      <thead>
-        <tr>
+  <!-- APPLICANTS -->
+  <div id="applicantsView">
+    <div class="stats" id="stats"></div>
+    <div class="toolbar">
+      <input type="search" id="search" placeholder="Search name, phone, area, interest…">
+      <select id="filter">
+        <option value="">All statuses</option>
+        <option value="new">New</option><option value="accepted">Accepted</option>
+        <option value="waitlist">Waitlist</option><option value="rejected">Rejected</option>
+      </select>
+      <select id="cycleFilter"><option value="">All cycles</option></select>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr>
           <th>Name</th><th>Age</th><th>Gender</th><th>Area</th><th>Phone</th>
-          <th>Interests</th><th>Wants to try</th><th>Applied</th><th>Status</th>
-        </tr>
-      </thead>
-      <tbody id="rows"></tbody>
-    </table>
-    <div class="empty hidden" id="empty">No applications yet.</div>
+          <th>Interests</th><th>Wants to try</th><th>Applied</th><th>Cycle</th><th>Status</th>
+        </tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <div class="empty hidden" id="empty">No applications yet.</div>
+    </div>
+  </div>
+
+  <!-- CYCLES -->
+  <div id="cyclesView" class="hidden">
+    <div class="newcycle">
+      <input id="ncName" placeholder="Cycle name (e.g. Cycle 1)">
+      <input id="ncRegion" placeholder="Region (e.g. Zamalek)" list="areas">
+      <button class="btn" id="ncBtn">Create cycle</button>
+      <span class="pill">seeds 4 outings: Connect · Play · Explore · Finale</span>
+    </div>
+    <div class="cycles" id="cycleCards"></div>
+    <div class="empty hidden" id="cyclesEmpty">No cycles yet. Create one above.</div>
   </div>
 </div>
+
+<datalist id="areas">
+  <option>Nasr City</option><option>Heliopolis</option><option>New Cairo / Rehab</option>
+  <option>Maadi</option><option>Zamalek</option><option>Downtown / Garden City</option>
+  <option>Mohandessin / Dokki</option><option>6th October / Sheikh Zayed</option>
+</datalist>
+
+<div id="banner"></div>
 
 <script>
 const CONFIG = {
@@ -158,27 +188,30 @@ const CONFIG = {
   anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im94Znp1b25oa3VmcGd2Z3F2amhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg0MzY4MDQsImV4cCI6MjEwNDAxMjgwNH0.8ErjRctRmGE46PEwI0p8IOZLrM_A6HpZLlvrGBSZ6fc"
 };
 const STATUSES = ['new','accepted','waitlist','rejected'];
+const CYCLE_STATUSES = ['planning','active','done'];
+const DEFAULT_OUTINGS = ['Connect','Play','Explore','Finale'];
 
 const sb = supabase.createClient(CONFIG.url, CONFIG.anonKey);
-
 const $ = id => document.getElementById(id);
-const loginView = $('loginView'), appView = $('appView');
-let DATA = [];
+let DATA = [], CYCLES = [], OUTINGS = [];
 
 function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+let bt;
+function toast(msg, bad){
+  const b = $('banner'); b.textContent = msg; b.style.color = bad ? 'var(--red)' : 'var(--nile)';
+  b.classList.add('show'); clearTimeout(bt); bt = setTimeout(()=>b.classList.remove('show'), bad?4000:1500);
+}
 
 /* ── auth ── */
 async function boot(){
   const { data:{ session } } = await sb.auth.getSession();
   session ? showApp(session) : showLogin();
 }
-function showLogin(){ appView.classList.add('hidden'); loginView.classList.remove('hidden'); }
+function showLogin(){ $('appView').classList.add('hidden'); $('loginView').classList.remove('hidden'); }
 function showApp(session){
-  loginView.classList.add('hidden'); appView.classList.remove('hidden');
-  $('who').textContent = session.user.email;
-  load();
+  $('loginView').classList.add('hidden'); $('appView').classList.remove('hidden');
+  $('who').textContent = session.user.email; loadAll();
 }
-
 $('loginForm').addEventListener('submit', async e => {
   e.preventDefault();
   const btn = $('loginBtn'); btn.disabled = true; btn.textContent = 'Signing in…'; $('loginErr').textContent='';
@@ -187,78 +220,198 @@ $('loginForm').addEventListener('submit', async e => {
   if(error){ $('loginErr').textContent = error.message; return; }
   showApp(data.session);
 });
-$('logoutBtn').onclick = async () => { await sb.auth.signOut(); DATA=[]; showLogin(); };
-$('refreshBtn').onclick = () => load();
+$('logoutBtn').onclick = async () => { await sb.auth.signOut(); DATA=CYCLES=OUTINGS=[]; showLogin(); };
+$('refreshBtn').onclick = () => loadAll();
+sb.auth.onAuthStateChange((_e, s) => { if(!s) showLogin(); });
 
-/* ── data ── */
-async function load(){
-  $('banner').textContent = 'Loading…';
-  const { data, error } = await sb.from('applications').select('*').order('created_at',{ascending:false});
-  if(error){ $('banner').style.color='var(--red)'; $('banner').textContent = 'Load failed: '+error.message; return; }
-  $('banner').style.color='var(--nile)'; $('banner').textContent='';
-  DATA = data || [];
-  renderStats(); render();
+/* ── tabs ── */
+document.querySelectorAll('.tab').forEach(t => t.onclick = () => {
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on', x===t));
+  const v = t.dataset.view;
+  $('applicantsView').classList.toggle('hidden', v!=='applicants');
+  $('cyclesView').classList.toggle('hidden', v!=='cycles');
+});
+
+/* ── load ── */
+async function loadAll(){
+  const [a,c,o] = await Promise.all([
+    sb.from('applications').select('*').order('created_at',{ascending:false}),
+    sb.from('cycles').select('*').order('created_at',{ascending:true}),
+    sb.from('outings').select('*').order('seq',{ascending:true})
+  ]);
+  if(a.error){ toast('Load failed: '+a.error.message, true); return; }
+  if(c.error){ toast('Cycles load failed: '+c.error.message, true); }
+  if(o.error){ toast('Outings load failed: '+o.error.message, true); }
+  DATA = a.data||[]; CYCLES = c.data||[]; OUTINGS = o.data||[];
+  renderStats(); renderCycleFilter(); renderApplicants(); renderCycles();
 }
+const cycleName = id => { const c = CYCLES.find(x=>x.id===id); return c ? c.name : ''; };
 
+/* ── applicants ── */
 function renderStats(){
   const counts = { total: DATA.length };
   STATUSES.forEach(s => counts[s] = DATA.filter(r => r.status===s).length);
   const cells = [['Total','total'],['New','new'],['Accepted','accepted'],['Waitlist','waitlist'],['Rejected','rejected']];
-  $('stats').innerHTML = cells.map(([label,key]) =>
-    `<div class="stat"><b>${counts[key]||0}</b><span>${label}</span></div>`).join('');
+  $('stats').innerHTML = cells.map(([l,k]) => `<div class="stat"><b>${counts[k]||0}</b><span>${l}</span></div>`).join('');
 }
-
-function render(){
-  const q = $('search').value.trim().toLowerCase();
-  const f = $('filter').value;
+function renderCycleFilter(){
+  const cur = $('cycleFilter').value;
+  $('cycleFilter').innerHTML = '<option value="">All cycles</option><option value="__none">Unassigned</option>' +
+    CYCLES.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join('');
+  $('cycleFilter').value = cur;
+}
+function cycleOptions(sel){
+  return '<option value="">— unassigned —</option>' +
+    CYCLES.map(c=>`<option value="${c.id}"${c.id===sel?' selected':''}>${esc(c.name)}</option>`).join('');
+}
+function renderApplicants(){
+  const q = $('search').value.trim().toLowerCase(), f = $('filter').value, cf = $('cycleFilter').value;
   const rows = DATA.filter(r => {
     if(f && r.status!==f) return false;
+    if(cf==='__none' && r.cycle_id) return false;
+    if(cf && cf!=='__none' && r.cycle_id!==cf) return false;
     if(!q) return true;
-    const hay = [r.name,r.phone,r.area,r.gender,(r.interests||[]).join(' '),r.want].join(' ').toLowerCase();
-    return hay.includes(q);
+    return [r.name,r.phone,r.area,r.gender,(r.interests||[]).join(' '),r.want].join(' ').toLowerCase().includes(q);
   });
-  const tb = $('rows');
   $('empty').classList.toggle('hidden', DATA.length!==0);
-  tb.innerHTML = rows.map(r => {
-    const tags = (r.interests||[]).map(t => `<span class="tag">${esc(t)}</span>`).join('');
+  $('rows').innerHTML = rows.map(r => {
+    const tags = (r.interests||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join('');
     const applied = r.created_at ? new Date(r.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short'}) : '';
-    const opts = STATUSES.map(s => `<option value="${s}"${s===r.status?' selected':''}>${s}</option>`).join('');
+    const stOpts = STATUSES.map(s=>`<option value="${s}"${s===r.status?' selected':''}>${s}</option>`).join('');
     return `<tr>
-      <td class="nm">${esc(r.name)}</td>
-      <td>${esc(r.age)}</td>
-      <td class="muted">${esc(r.gender)}</td>
-      <td>${esc(r.area)}</td>
-      <td class="phone">${esc(r.phone)}</td>
-      <td><div class="tags">${tags}</div></td>
-      <td class="want">${esc(r.want)}</td>
+      <td class="nm">${esc(r.name)}</td><td>${esc(r.age)}</td><td class="muted">${esc(r.gender)}</td>
+      <td>${esc(r.area)}</td><td class="phone">${esc(r.phone)}</td>
+      <td><div class="tags">${tags}</div></td><td class="want">${esc(r.want)}</td>
       <td class="muted">${applied}</td>
-      <td><select class="s-${esc(r.status)}" data-id="${esc(r.id)}">${opts}</select></td>
+      <td><select data-assign="${esc(r.id)}">${cycleOptions(r.cycle_id)}</select></td>
+      <td><select class="s-${esc(r.status)}" data-status="${esc(r.id)}">${stOpts}</select></td>
     </tr>`;
   }).join('');
-
-  tb.querySelectorAll('select').forEach(sel => sel.addEventListener('change', onStatusChange));
+  $('rows').querySelectorAll('[data-status]').forEach(s => s.onchange = onStatusChange);
+  $('rows').querySelectorAll('[data-assign]').forEach(s => s.onchange = onAssign);
 }
-
 async function onStatusChange(e){
-  const sel = e.target, id = sel.dataset.id, status = sel.value, prev = DATA.find(r=>r.id===id)?.status;
-  sel.disabled = true;
-  const { error } = await sb.from('applications').update({ status }).eq('id', id);
-  sel.disabled = false;
-  if(error){
-    $('banner').style.color='var(--red)'; $('banner').textContent = 'Update failed: '+error.message;
-    sel.value = prev; return;
-  }
-  const row = DATA.find(r=>r.id===id); if(row) row.status = status;
-  sel.className = 's-'+status;
-  $('banner').style.color='var(--nile)'; $('banner').textContent = 'Saved.';
-  renderStats();
-  setTimeout(()=>{ if($('banner').textContent==='Saved.') $('banner').textContent=''; }, 1500);
+  const sel=e.target, id=sel.dataset.status, status=sel.value, prev=DATA.find(r=>r.id===id)?.status;
+  sel.disabled=true;
+  const { error } = await sb.from('applications').update({status}).eq('id',id);
+  sel.disabled=false;
+  if(error){ toast('Update failed: '+error.message,true); sel.value=prev; return; }
+  const row=DATA.find(r=>r.id===id); if(row) row.status=status; sel.className='s-'+status;
+  renderStats(); toast('Saved.');
+}
+async function onAssign(e){
+  const sel=e.target, id=sel.dataset.assign, cycle_id=sel.value||null, prev=DATA.find(r=>r.id===id)?.cycle_id;
+  sel.disabled=true;
+  const { error } = await sb.from('applications').update({cycle_id}).eq('id',id);
+  sel.disabled=false;
+  if(error){ toast('Assign failed: '+error.message,true); sel.value=prev||''; return; }
+  const row=DATA.find(r=>r.id===id); if(row) row.cycle_id=cycle_id;
+  renderCycles(); toast('Assigned.');
 }
 
-$('search').addEventListener('input', render);
-$('filter').addEventListener('change', render);
+/* ── cycles ── */
+$('ncBtn').onclick = async () => {
+  const name = $('ncName').value.trim(); if(!name){ toast('Name the cycle first.',true); return; }
+  const region = $('ncRegion').value.trim() || null;
+  $('ncBtn').disabled = true;
+  const { data, error } = await sb.from('cycles').insert({name, region}).select().single();
+  if(error){ $('ncBtn').disabled=false; toast('Create failed: '+error.message,true); return; }
+  const seed = DEFAULT_OUTINGS.map((title,i)=>({cycle_id:data.id, seq:i+1, title}));
+  const { error:oe } = await sb.from('outings').insert(seed);
+  $('ncBtn').disabled=false;
+  if(oe) toast('Cycle made, outings failed: '+oe.message, true);
+  $('ncName').value=''; $('ncRegion').value='';
+  await loadAll(); toast('Cycle created.');
+};
 
-sb.auth.onAuthStateChange((_e, session) => { if(!session) showLogin(); });
+function renderCycles(){
+  $('cyclesEmpty').classList.toggle('hidden', CYCLES.length!==0);
+  $('cycleCards').innerHTML = CYCLES.map(c => {
+    const outs = OUTINGS.filter(o=>o.cycle_id===c.id).sort((a,b)=>a.seq-b.seq);
+    const members = DATA.filter(r=>r.cycle_id===c.id);
+    const stOpts = CYCLE_STATUSES.map(s=>`<option value="${s}"${s===c.status?' selected':''}>${s}</option>`).join('');
+    const outHtml = outs.map(o=>`
+      <div class="outing">
+        <span class="seq">${o.seq}</span>
+        <input class="ot" data-out-title="${o.id}" value="${esc(o.title)}" placeholder="Title">
+        <input class="ol" data-out-loc="${o.id}" value="${esc(o.location)}" placeholder="Location">
+        <input class="ol" data-out-date="${o.id}" value="${esc(o.date)}" placeholder="Date" style="flex:.9">
+        <button class="x" data-out-del="${o.id}" title="Delete outing">×</button>
+      </div>`).join('');
+    const roster = members.length ? members.map(m=>`
+      <span class="rmember">${esc(m.name)} <span class="muted">${esc(m.phone)}</span>
+        <button data-unassign="${m.id}" title="Remove from cycle">×</button></span>`).join('')
+      : '<span class="muted" style="font-size:12.5px">No one assigned yet.</span>';
+    return `<div class="cyc">
+      <div class="chead">
+        <input class="cname" data-cyc-name="${c.id}" value="${esc(c.name)}">
+        <span class="pill">${members.length} member${members.length===1?'':'s'}</span>
+      </div>
+      <div class="cmeta">
+        <input data-cyc-region="${c.id}" value="${esc(c.region)}" placeholder="Region" list="areas">
+        <select data-cyc-status="${c.id}">${stOpts}</select>
+      </div>
+      <h4>Outings</h4>
+      ${outHtml}
+      <button class="btn ghost sm" data-out-add="${c.id}" style="margin-top:6px">+ Add outing</button>
+      <h4>Roster</h4>
+      <div class="roster">${roster}</div>
+      <div class="cfoot">
+        <button class="btn danger sm" data-cyc-del="${c.id}">Delete cycle</button>
+      </div>
+    </div>`;
+  }).join('');
+  wireCycleCards();
+}
+
+function wireCycleCards(){
+  const root = $('cycleCards');
+  const upd = (table, id, patch, ok) => async e => {
+    const { error } = await sb.from(table).update(patch(e.target)).eq('id', id);
+    if(error){ toast('Save failed: '+error.message, true); return; }
+    // keep local state in sync
+    const arr = table==='cycles'?CYCLES:OUTINGS; const rec = arr.find(x=>x.id===id);
+    if(rec) Object.assign(rec, patch(e.target));
+    if(ok) ok();
+  };
+  root.querySelectorAll('[data-cyc-name]').forEach(el=>el.onchange = upd('cycles', el.dataset.cycName, t=>({name:t.value.trim()}), ()=>{renderCycleFilter();renderApplicants();toast('Saved.');}));
+  root.querySelectorAll('[data-cyc-region]').forEach(el=>el.onchange = upd('cycles', el.dataset.cycRegion, t=>({region:t.value.trim()||null}), ()=>toast('Saved.')));
+  root.querySelectorAll('[data-cyc-status]').forEach(el=>el.onchange = upd('cycles', el.dataset.cycStatus, t=>({status:t.value}), ()=>toast('Saved.')));
+  root.querySelectorAll('[data-out-title]').forEach(el=>el.onchange = upd('outings', el.dataset.outTitle, t=>({title:t.value.trim()}), ()=>toast('Saved.')));
+  root.querySelectorAll('[data-out-loc]').forEach(el=>el.onchange = upd('outings', el.dataset.outLoc, t=>({location:t.value.trim()||null}), ()=>toast('Saved.')));
+  root.querySelectorAll('[data-out-date]').forEach(el=>el.onchange = upd('outings', el.dataset.outDate, t=>({date:t.value.trim()||null}), ()=>toast('Saved.')));
+
+  root.querySelectorAll('[data-out-add]').forEach(el=>el.onclick = async () => {
+    const cid = el.dataset.outAdd; const seq = OUTINGS.filter(o=>o.cycle_id===cid).length + 1;
+    const { error } = await sb.from('outings').insert({cycle_id:cid, seq, title:'New outing'});
+    if(error){ toast('Add failed: '+error.message, true); return; }
+    await loadAll();
+  });
+  root.querySelectorAll('[data-out-del]').forEach(el=>el.onclick = async () => {
+    const { error } = await sb.from('outings').delete().eq('id', el.dataset.outDel);
+    if(error){ toast('Delete failed: '+error.message, true); return; }
+    await loadAll(); toast('Outing deleted.');
+  });
+  root.querySelectorAll('[data-unassign]').forEach(el=>el.onclick = async () => {
+    const id = el.dataset.unassign;
+    const { error } = await sb.from('applications').update({cycle_id:null}).eq('id', id);
+    if(error){ toast('Remove failed: '+error.message, true); return; }
+    const row=DATA.find(r=>r.id===id); if(row) row.cycle_id=null;
+    renderApplicants(); renderCycles(); toast('Removed.');
+  });
+  root.querySelectorAll('[data-cyc-del]').forEach(el=>el.onclick = async () => {
+    const cid = el.dataset.cycDel; const c = CYCLES.find(x=>x.id===cid);
+    if(!confirm('Delete "'+(c?c.name:'cycle')+'"? Its outings go too; members become unassigned.')) return;
+    const { error } = await sb.from('cycles').delete().eq('id', cid);
+    if(error){ toast('Delete failed: '+error.message, true); return; }
+    await loadAll(); toast('Cycle deleted.');
+  });
+}
+
+$('search').addEventListener('input', renderApplicants);
+$('filter').addEventListener('change', renderApplicants);
+$('cycleFilter').addEventListener('change', renderApplicants);
+
 boot();
 </script>
 </body>
